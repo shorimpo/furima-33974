@@ -16,54 +16,55 @@
 ### association
 
 - has_many :items
-- has_many :purchase-records
+- has_many :purchase_records
 
 ## itemsテーブル
 
-| Column                      | Type      | Options    |
-| --------------------------- | --------- | -----------|
-| item_name                   | string    | NOT NULL   |
-| item_info                   | text      | NOT NULL   |
-| item_category_id            | integer   | NOT NULL   |
-| item_sales-status_id        | integer   | NOT NULL   |
-| item_shipping_fee_status_id | integer   | NOT NULL   |
-| item_prefecture_id          | integer   | NOT NULL   |
-| item_price                  | integer   | NOT NULL   |
-| item_scheduled_delivery_id  | integer   | NOT NULL   |
-| user                        | reference |            |
+| Column                      | Type      | Options           |
+| --------------------------- | --------- | ------------------|
+| item_name                   | string    | NOT NULL          |
+| item_info                   | text      | NOT NULL          |
+| item_category_id            | integer   | NOT NULL          |
+| item_sales_status_id        | integer   | NOT NULL          |
+| item_shipping_fee_status_id | integer   | NOT NULL          |
+| item_prefecture_id          | integer   | NOT NULL          |
+| item_price                  | integer   | NOT NULL          |
+| item_scheduled_delivery_id  | integer   | NOT NULL          |
+| user                        | reference | foreign_key: true |
 
 ### association
 
 - belongs_to :user
-- has_one    :purchase-records
+- has_one    :purchase_record
 
 
-## purchase-recordテーブル
+## purchase_recordsテーブル
 
-| Column              | Type      | Options      |
-| --------------------| ----------|--------------|
-| purchaser           | string    | NOT NULL     |
-| purchased_item      | string    | NOT NULL     |
+| Column              | Type         | Options           |
+| --------------------| -------------|-------------------|
+| user_id             | reference    | foreign_key: true |
+| item_id             | reference    | foreign_key: true |
 
 
 ### association
 
 - belongs_to :user
 - belongs_to :item
-- has_one    :shipping-address
+- has_one    :shipping_address
 
 
-## shipping-addressテーブル
+## shipping_addressesテーブル
 
-| Column        | Type     | Options     |
-| ------------- | -------- | ----------- |
-| postal_code   | string   | NOT NULL    |
-| prefecture_id | integer  | NOT NULL    |
-| city          | string   | NOT NULL    |
-| addresses     | string   | NOT NULL    |
-| building      | string   |             |
-| phone_number  | string   | NOT NULL    |
+| Column              | Type      | Options           |
+| ------------------- | --------- | ----------------- |
+| postal_code         | string    | NOT NULL          |
+| prefecture_id       | integer   | NOT NULL          |
+| city                | string    | NOT NULL          |
+| addresses           | string    | NOT NULL          |
+| building            | string    |                   |
+| phone_number        | string    | NOT NULL          |
+| purchase_record_id  | reference | foreign_key: true |
 
 ### association
 
-- belongs_to :purchase-record
+- belongs_to :purchase_record
