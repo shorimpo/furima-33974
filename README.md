@@ -1,24 +1,73 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## usersテーブル
 
-Things you may want to cover:
+| Column                  | Type     | Options     |
+| ----------------------- | -------- | ----------- |
+| nickname                | string   | NOT NULL    |
+| email                   | string   | NOT NULL    |
+| password                | string   | NOT NULL    |
+| password-confirmation   | string   | NOT NULL    |
+| last-name               | string   | NOT NULL    |
+| first-name              | string   | NOT NULL    |
+| last-name-kana          | string   | NOT NULL    |
+| first-name-kana         | string   | NOT NULL    |
+| user-birth-data-1i      | integer  | NOT NULL    |
 
-* Ruby version
+### association
 
-* System dependencies
+- has_many :items
+- has_one  :charge
+- has_one  :shipping-address
 
-* Configuration
+## itemsテーブル
 
-* Database creation
+| Column                   | Type     | Options     |
+| ------------------------ | -------- | ----------- |
+| item-image               | text     | NOT NULL    |
+| item-name                | string   | NOT NULL    |
+| item-info                | text     | NOT NULL    |
+| item-category            | string   | NOT NULL    |
+| item-sales-status        | string   | NOT NULL    |
+| item-shipping-fee-status | string   | NOT NULL    |
+| item-prefecture          | string   | NOT NULL    |
+| item-price               | integer  | NOT NULL    |
+| add-tax-price            | integer  | NOT NULL    |
+| profit                   | integer  | NOT NULL    |
+| item-scheduled-delivery  | integer  | NOT NULL    |
 
-* Database initialization
+### association
 
-* How to run the test suite
+- belongs_to :users
+- has_one    :charge
+- has_one    :shipping-address
 
-* Services (job queues, cache servers, search engines, etc.)
+## chargeテーブル
 
-* Deployment instructions
+| Column              | Type      | Options      |
+| --------------------| ----------|--------------|
+| card-number         | integer   | NOT NULL     |
+| card-exp-month      | integer   | NOT NULL     |
+| carf-exp-year       | integer   | NOT NULL     |
+| card-cvc            | integer   | NOT NULL     |
 
-* ...
+### association
+
+- belongs_to :users
+- belongs_to :items
+
+## shipping-addressテーブル
+
+| Column        | Type     | Options     |
+| ------------- | -------- | ----------- |
+| postel-code   | integer  | NOT NULL    |
+| prefecture    | string   | NOT NULL    |
+| city          | string   | NOT NULL    |
+| addresses     | integer  | NOT NULL    |
+| building      | string   | NOT NULL    |
+| phone-number  | integer  | NOT NULL    |
+
+### association
+
+- belongs_to :users
+- belongs_to :items
