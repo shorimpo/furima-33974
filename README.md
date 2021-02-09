@@ -2,65 +2,72 @@
 
 ## usersテーブル
 
-| Column                  | Type     | Options                  |
-| ----------------------- | -------- | -------------------------|
-| nickname                | string   | NOT NULL                 |
-| email                   | string   | NOT NULL, unique: true   |
-| encrypted_password      | string   | NOT NULL                 |
-| last_name               | string   | NOT NULL                 |
-| first_name              | string   | NOT NULL                 |
-| last_name_kana          | string   | NOT NULL                 |
-| first_name_kana         | string   | NOT NULL                 |
-| user_birth_data_1i      | date     | NOT NULL                 | 
+| Column                  | Type     | Options     |
+| ----------------------- | -------- | ----------- |
+| nickname                | string   | NOT NULL    |
+| email                   | string   | NOT NULL    |
+| password                | string   | NOT NULL    |
+| password-confirmation   | string   | NOT NULL    |
+| last-name               | string   | NOT NULL    |
+| first-name              | string   | NOT NULL    |
+| last-name-kana          | string   | NOT NULL    |
+| first-name-kana         | string   | NOT NULL    |
+| user-birth-data-1i      | integer  | NOT NULL    |
 
 ### association
 
 - has_many :items
-- has_many :purchase-record
+- has_one  :charge
+- has_one  :shipping-address
 
 ## itemsテーブル
 
-| Column                      | Type     | Options     |
-| --------------------------- | -------- | ----------- |
-| item_name                   | string   | NOT NULL    |
-| item_info                   | text     | NOT NULL    |
-| item_category_id            | intege   | NOT NULL    |
-| item_sales-status_id        | integer  | NOT NULL    |
-| item_shipping-fee-status_id | integer  | NOT NULL    |
-| item_prefecture_id          | integer  | NOT NULL    |
-| item_price                  | integer  | NOT NULL    |
-| item_scheduled_delivery_id  | integer  | NOT NULL    |
+| Column                   | Type     | Options     |
+| ------------------------ | -------- | ----------- |
+| item-image               | text     | NOT NULL    |
+| item-name                | string   | NOT NULL    |
+| item-info                | text     | NOT NULL    |
+| item-category            | string   | NOT NULL    |
+| item-sales-status        | string   | NOT NULL    |
+| item-shipping-fee-status | string   | NOT NULL    |
+| item-prefecture          | string   | NOT NULL    |
+| item-price               | integer  | NOT NULL    |
+| add-tax-price            | integer  | NOT NULL    |
+| profit                   | integer  | NOT NULL    |
+| item-scheduled-delivery  | integer  | NOT NULL    |
 
 ### association
 
-- belongs_to :user
-- has_one    :purchase-record
+- belongs_to :users
+- has_one    :charge
+- has_one    :shipping-address
 
-## purchase-recordテーブル
+## chargeテーブル
 
 | Column              | Type      | Options      |
 | --------------------| ----------|--------------|
-| purchaser           | string    | NOT NULL     |
-| purchased_item      | string    | NOT NULL     |
-
+| card-number         | integer   | NOT NULL     |
+| card-exp-month      | integer   | NOT NULL     |
+| carf-exp-year       | integer   | NOT NULL     |
+| card-cvc            | integer   | NOT NULL     |
 
 ### association
 
-- belongs_to :user
-- belongs_to :item
-- has_one    :shipping-address
+- belongs_to :users
+- belongs_to :items
 
 ## shipping-addressテーブル
 
-| Column           | Type     | Options     |
-| ---------------- | -------- | ----------- |
-| postal_code      | string   | NOT NULL    |
-| prefecture_id    | integer  | NOT NULL    |
-| city             | string   | NOT NULL    |
-| addresses        | string   | NOT NULL    |
-| building         | string   |             |
-| phone_number     | string   | NOT NULL    |
+| Column        | Type     | Options     |
+| ------------- | -------- | ----------- |
+| postel-code   | integer  | NOT NULL    |
+| prefecture    | string   | NOT NULL    |
+| city          | string   | NOT NULL    |
+| addresses     | integer  | NOT NULL    |
+| building      | string   | NOT NULL    |
+| phone-number  | integer  | NOT NULL    |
 
 ### association
 
-- belongs_to :purchase-record
+- belongs_to :users
+- belongs_to :items
