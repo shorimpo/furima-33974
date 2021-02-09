@@ -42,8 +42,8 @@
 
 | Column              | Type         | Options           |
 | --------------------| -------------|-------------------|
-| user_id             | reference    | foreign_key: true |
-| item_id             | reference    | foreign_key: true |
+| user                | reference    | foreign_key: true |
+| item                | reference    | foreign_key: true |
 
 
 ### association
@@ -63,7 +63,7 @@
 | addresses           | string    | NOT NULL          |
 | building            | string    |                   |
 | phone_number        | string    | NOT NULL          |
-| purchase_record_id  | reference | foreign_key: true |
+| purchase_record     | reference | foreign_key: true |
 
 ### association
 
