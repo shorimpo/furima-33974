@@ -4,14 +4,14 @@
 
 | Column                  | Type     | Options                   |
 | ----------------------- | -------- | ------------------------- |
-| nickname                | string   | NOT NULL                  |
-| email                   | string   | NOT NULL, unique: true    |
-| encrypted_password      | string   | NOT NULL                  |
-| last_name               | string   | NOT NULL                  |
-| first_name              | string   | NOT NULL                  |
-| last_name_kana          | string   | NOT NULL                  |
-| first_name_kana         | string   | NOT NULL                  |
-| user_birth_data_1i      | date     | NOT NULL                  |
+| nickname                | string   | null: false               |
+| email                   | string   | null: false, unique: true |
+| encrypted_password      | string   | null: false               |
+| last_name               | string   | null: false               |
+| first_name              | string   | null: false               |
+| last_name_kana          | string   | null: false               |
+| first_name_kana         | string   | null: false               |
+| user_birth_data_1i      | date     | null: false               |
 
 ### association
 
@@ -22,14 +22,14 @@
 
 | Column                      | Type      | Options           |
 | --------------------------- | --------- | ------------------|
-| item_name                   | string    | NOT NULL          |
-| item_info                   | text      | NOT NULL          |
-| item_category_id            | integer   | NOT NULL          |
-| item_sales_status_id        | integer   | NOT NULL          |
-| item_shipping_fee_status_id | integer   | NOT NULL          |
-| item_prefecture_id          | integer   | NOT NULL          |
-| item_price                  | integer   | NOT NULL          |
-| item_scheduled_delivery_id  | integer   | NOT NULL          |
+| name                        | string    | null: false       |
+| info                        | text      | null: false       |
+| category_id                 | integer   | null: false       |
+| sales_status_id             | integer   | null: false       |
+| shipping_fee_status_id      | integer   | null: false       |
+| prefecture_id               | integer   | null: false       |
+| price                       | integer   | null: false       |
+| scheduled_delivery_id       | integer   | null: false       |
 | user                        | reference | foreign_key: true |
 
 ### association
@@ -57,12 +57,12 @@
 
 | Column              | Type      | Options           |
 | ------------------- | --------- | ----------------- |
-| postal_code         | string    | NOT NULL          |
-| prefecture_id       | integer   | NOT NULL          |
-| city                | string    | NOT NULL          |
-| addresses           | string    | NOT NULL          |
+| postal_code         | string    | null: false       |
+| prefecture_id       | integer   | null: false       |
+| city                | string    | null: false       |
+| addresses           | string    | null: false       |
 | building            | string    |                   |
-| phone_number        | string    | NOT NULL          |
+| phone_number        | string    | null: false       |
 | purchase_record     | reference | foreign_key: true |
 
 ### association
