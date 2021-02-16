@@ -1,0 +1,10 @@
+class ChangeOptionTitleToUsers < ActiveRecord::Migration[6.0]
+  def change
+    change_column :users, :nickname, :string, null: false
+    change_column :users, :last_name, :string, null: false
+    change_column :users, :first_name, :string, null: false
+    change_column :users, :last_name_kana, :string, null: false
+    change_column :users, :first_name_kana, :string, null: false
+    change_column :users, :user_birth_data_1i, :string, null: false
+  end
+end
