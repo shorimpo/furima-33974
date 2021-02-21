@@ -78,6 +78,36 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include('Price Out of setting range')
       end
+
+      it 'category_idが1だと登録できない' do
+        @item.category_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Category Select")
+      end
+
+      it 'sales_status_idが1だと登録できない' do
+        @item.sales_status_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Sales status Select")
+      end
+
+      it 'shipping_fee_status_idが1だと登録できない' do
+        @item.shipping_fee_status_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Shipping fee status Select")
+      end
+
+      it 'prefecture_idが1だと登録できない' do
+        @item.prefecture_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Prefecture Select")
+      end
+
+      it 'scheduled_delivery_idが1だと登録できない' do
+        @item.scheduled_delivery_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Scheduled delivery Select")
+      end
     end
   end
 end

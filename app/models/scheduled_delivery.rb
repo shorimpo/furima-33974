@@ -7,6 +7,6 @@ class ScheduledDelivery < ActiveHash::Base
 
   ]
 
-  extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to :item
+  include ActiveHash::Associations
+  has_many :items
 end
