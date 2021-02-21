@@ -108,6 +108,25 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Scheduled delivery Select")
       end
+
+      it 'priceが¥10,000,000以上だと登録できない' do
+        @item.price = 10000000
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price Out of setting range")
+      end
+
+      it 'priceが半角英数混合では登録できない' do
+        @item.price = 'aaa123'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price Half-width number", "Price Out of setting range")
+      end
+
+      it 'priceが半角英語だけでは登録できない' do
+        @item.price = 'abc'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price Half-width number", "Price Out of setting range")
+      end
+
     end
   end
 end

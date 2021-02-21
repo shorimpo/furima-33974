@@ -9,6 +9,8 @@ class Item < ApplicationRecord
   belongs_to :prefecture
   belongs_to :scheduled_delivery
 
+  belongs_to :user
+
   with_options presence: true do
     validates :name
     validates :info
@@ -21,8 +23,9 @@ class Item < ApplicationRecord
     validates :scheduled_delivery_id
   end
 
+  validates :price, numericality: { only_integer: true, message: 'Half-width number' }
   validates :price, inclusion: { in: 300..9_999_999, message: 'Out of setting range' }
-  validates :price, format: { with: /\A-?[0-9]+(\.[0-9]+)?\z/, message: 'Half-width number' }
+
 
   with_options numericality: { other_than: 1, message: 'Select' } do
     validates :category_id
