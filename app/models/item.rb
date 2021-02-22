@@ -1,7 +1,6 @@
 class Item < ApplicationRecord
   has_one_attached :image
 
-  
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
   belongs_to :sales_status
@@ -10,6 +9,7 @@ class Item < ApplicationRecord
   belongs_to :scheduled_delivery
 
   belongs_to :user
+  has_one :purchase_record
 
   with_options presence: true do
     validates :name
@@ -25,7 +25,6 @@ class Item < ApplicationRecord
 
   validates :price, numericality: { only_integer: true, message: 'Half-width number' }
   validates :price, inclusion: { in: 300..9_999_999, message: 'Out of setting range' }
-
 
   with_options numericality: { other_than: 1, message: 'Select' } do
     validates :category_id
