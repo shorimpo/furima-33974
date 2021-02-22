@@ -111,14 +111,16 @@ RSpec.describe User, type: :model do
         @user.password = 'aaaaaa'
         @user.password_confirmation = 'aaaaaa'
         @user.valid?
-        expect(@user.errors.full_messages).to include('Password Include both letters and numbers', 'Password confirmation Include both letters and numbers')
+        expect(@user.errors.full_messages).to include('Password Include both letters and numbers',
+                                                      'Password confirmation Include both letters and numbers')
       end
 
       it 'passwordが全角では登録できない' do
         @user.password = 'ａｂｃ１２３'
         @user.password_confirmation = 'ａｂｃ１２３'
         @user.valid?
-        expect(@user.errors.full_messages).to include('Password Include both letters and numbers', 'Password confirmation Include both letters and numbers')
+        expect(@user.errors.full_messages).to include('Password Include both letters and numbers',
+                                                      'Password confirmation Include both letters and numbers')
       end
 
       it 'emailに@がない場合登録できない' do
@@ -126,7 +128,6 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include('Email is invalid')
       end
-
     end
   end
 end
