@@ -1,7 +1,7 @@
 class PurchaseRecordsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_item
-  before_action :redirect_motion, only: :index
+  before_action :redirect_motion, only: [:index, :create]
   before_action :soldout_redirect, only: [:index, :create]
 
   def index
