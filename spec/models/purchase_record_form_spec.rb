@@ -14,6 +14,11 @@ RSpec.describe PurchaseRecordForm, type: :model do
       it "すべての値が正しく入力されていれば保存できること" do
         expect(@purchase_record_form).to be_valid
       end
+
+      it "建物名が空でも購入できる" do
+        @purchase_record_form.building = ""
+        expect(@purchase_record_form).to be_valid
+      end
     end
 
 
@@ -63,7 +68,7 @@ RSpec.describe PurchaseRecordForm, type: :model do
       it "電話番号は数値のみ保存可能である" do
         @purchase_record_form.phone_number = "aaaaaaaaaaa"
         @purchase_record_form.valid?
-        expect(@purchase_record_form.errors.full_messages).to include("Phone number is invalid", "Phone number Phone number Input only number")
+        expect(@purchase_record_form.errors.full_messages).to include("Phone number is invalid", "Phone number Input only number")
       end
 
       it "tokenが空では登録できないこと" do
