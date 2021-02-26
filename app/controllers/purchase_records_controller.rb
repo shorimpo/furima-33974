@@ -1,17 +1,15 @@
 class PurchaseRecordsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :set_item
+  before_action :redirect_motion, only: :index
+  before_action :soldout_redirect, only: :index
 
   def index
     @purchase_record_form = PurchaseRecordForm.new
-    @items = Item.all
-    @item = Item.find(params[:item_id])
-
-    
   end
 
   def create
     @purchase_record_form = PurchaseRecordForm.new(purchase_record_params)
-    @item = Item.find(params[:item_id])
-
     if @purchase_record_form.valid?
       pay_item
       @purchase_record_form.save
@@ -39,4 +37,21 @@ class PurchaseRecordsController < ApplicationController
       )
   end
 
+  private
+
+  def redirect_motion
+    if current_user.id == @item.user_id
+      redirect_to root_path
+    end
+  end
+
+  def soldout_redirect
+    if @item.purchase_record.present? 
+      redirect_to root_path
+    end
+  end
+
+  def set_item
+    @item = Item.find(params[:item_id])
+  end
 end
