@@ -9,7 +9,6 @@ RSpec.describe PurchaseRecordForm, type: :model do
       sleep 0.1
     end
 
-
     context '出品がうまくいくとき' do
       it "すべての値が正しく入力されていれば保存できること" do
         expect(@purchase_record_form).to be_valid
@@ -20,7 +19,6 @@ RSpec.describe PurchaseRecordForm, type: :model do
         expect(@purchase_record_form).to be_valid
       end
     end
-
 
     context '出品が上手くいかないとき' do
       it "郵便番号が空だと登録できない" do
