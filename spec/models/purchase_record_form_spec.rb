@@ -77,7 +77,23 @@ RSpec.describe PurchaseRecordForm, type: :model do
         expect(@purchase_record_form.errors.full_messages).to include("Token can't be blank")
       end
 
+      it 'prefecture_idが1だと登録できない' do
+        @purchase_record_form.prefecture_id = 1
+        @purchase_record_form.valid?
+        expect(@purchase_record_form.errors.full_messages).to include('Prefecture Select')
+      end
 
+      it "user_idが空だと登録できない" do
+        @purchase_record_form.user_id = ""
+        @purchase_record_form.valid?
+        expect(@purchase_record_form.errors.full_messages).to include("User can't be blank")
+      end
+
+      it "item_idが空だと登録できない" do
+        @purchase_record_form.item_id = ""
+        @purchase_record_form.valid?
+        expect(@purchase_record_form.errors.full_messages).to include("Item can't be blank")
+      end
     end
   end
 end
